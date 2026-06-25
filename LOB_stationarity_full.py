@@ -1,5 +1,5 @@
 """
-LOB  (LOG-UTILITY action selection) + FULL stationarity diagnostics
+FULL stationarity diagnostics
 
 
 All stationarity checks:
@@ -18,7 +18,6 @@ All stationarity checks:
    - logR histogram
    - Detailed balance report on mid-bin transitions
 
-Run as: python this_file.py
 """
 
 import random
@@ -111,7 +110,6 @@ class Agent:
     def utility(self) -> float:
         return self.utility_at(self.M, self.G)
 
-    # numerically stable log-utility
     def log_utility_at(self, M: float, G: float) -> float:
         M = max(float(M), EPS)
         G = max(float(G), EPS)
@@ -323,7 +321,7 @@ class LOB:
         return chosen_side, Order(agent, chosen_price, Q_TRADE, arrival_time)
 
     # -----------------------------
-    # Trading (MH-gated)
+    # Trading 
     # -----------------------------
     def execute_trade_mh(self, bid_order, ask_order, aggressor_side, t_now: int):
         price = ask_order.price if aggressor_side == "bid" else bid_order.price
@@ -365,8 +363,8 @@ class LOB:
         if logR >= 0.0:
             accept = True
         else:
-            #accept = (random.random() < math.exp(logR))
-            accept = True
+            #accept = (random.random() < math.exp(logR)) 
+            accept = True #removing MH gated-ness
 
         if not accept:
             self.mh_rejects += 1
@@ -439,7 +437,7 @@ class LOB:
 
 
 # =========================================================
-# Diagnostics helpers (OLD suite + NEW suite)
+# Diagnostics helpers
 # =========================================================
 
 def compute_midprice(bb, ba):
@@ -635,7 +633,7 @@ def detailed_balance_report(mid_series, burn_in_steps=50_000, n_bins=25, plot=Tr
 
 
 # =========================================================
-# Plotting (OLD suite)
+# Plotting
 # =========================================================
 
 def _downsample_xy(x, y, max_n):
@@ -1283,7 +1281,7 @@ if __name__ == "__main__":
     plot_rolling_mh_acceptance(chain0, rolling_window=5000, rolling_step=1000)
     plot_logR_hist(chain0, bins=60)
 
-    # (NEW) detailed balance check on mid bins
+    # detailed balance check on mid bins
     #_ = detailed_balance_report(
     #    chain0["mid_series_full"],
     #    burn_in_steps=50_000,
@@ -1291,7 +1289,7 @@ if __name__ == "__main__":
     #    plot=True,
     #)
 
-    # (OLD) resting LOB at end
+    # resting LOB at end
     plot_resting_lob_and_trades(chain0)
 
     # ---------- multi-chain checks (money/goods stationarity cross-chain) ----------
