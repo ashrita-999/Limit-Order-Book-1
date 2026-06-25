@@ -248,7 +248,7 @@ class AffiliateMap:
 
 
 # =========================================================
-# LOB (money-only contact settlement + MH)
+# LOB
 # =========================================================
 class LOB:
     def __init__(self, name: str, global_money_cap: float, affiliate_map: AffiliateMap | None):
@@ -512,7 +512,7 @@ class LOB:
         return dlogU_principal + dlogU_affiliate
 
     # -----------------------------
-    # Trading (MH-gated) with money-only contact settlement
+    # Trading with money-only contact settlement
     # -----------------------------
     def _principal_logU_after(self, principal: Agent, dM: float, dG_if_local: float) -> float:
         M2 = principal.M + dM
