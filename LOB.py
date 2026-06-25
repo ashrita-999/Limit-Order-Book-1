@@ -308,7 +308,7 @@ class LOB:
         return chosen_side, Order(agent, chosen_price, Q_TRADE, arrival_time)
 
     # -----------------------------
-    # Trading (MH-gated)
+    # Trading
     # -----------------------------
     def execute_trade_mh(self, bid_order, ask_order, aggressor_side, t_now: int):
         price = ask_order.price if aggressor_side == "bid" else bid_order.price
@@ -349,7 +349,7 @@ class LOB:
             accept = True
         else:
             #accept = (random.random() < math.exp(logR))
-            accept = True
+            accept = True #removing MH gating
 
         if not accept:
             self.mh_rejects += 1
