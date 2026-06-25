@@ -22,7 +22,7 @@ P_MIN = TICK_SIZE  # minimum admissible price
 
 # Fill window
 P_FILL_MIN = 1e-9
-K_MAX = int(math.ceil(-math.log(P_FILL_MIN)))  # exp(-K_MAX) ~ P_FILL_MIN
+K_MAX = int(math.ceil(-math.log(P_FILL_MIN))) 
 
 # Bootstrap / seeding phase
 SEED_STEPS = 100
