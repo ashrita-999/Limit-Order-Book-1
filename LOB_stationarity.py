@@ -322,7 +322,8 @@ class LOB:
 
         if not accept:
             self.mh_rejects += 1
-            return False
+            #return False
+            return True
 
         self.mh_accepts += 1
         self.mh_accept_times.append(int(t_now))
